@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const path = require('path');
 
 // const dotenv = require('dotenv');
@@ -50,36 +50,36 @@ const path = require('path');
 const port = process.env.PORT || 3000;
 const static = process.env.STATIC_DIR || './city-guide/dist/city-guide';
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(multer({ storage: storage }).single('image'));
-app.use(cookieParser());
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 1000 * 60 * 60,
-      // maxAge: 1000 * 60 * 60 * 24 * 7,
-    },
-    store: store,
-  })
-);
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(multer({ storage: storage }).single('image'));
+// app.use(cookieParser());
+// app.use(
+//   session({
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//       maxAge: 1000 * 60 * 60,
+//       // maxAge: 1000 * 60 * 60 * 24 * 7,
+//     },
+//     store: store,
+//   })
+// );
 app.use(express.static(path.join(__dirname, static)));
 
-app.use((req, res, next) => {
-  if (!req.session.user) {
-    return next();
-  }
-  User.findById(req.session.user._id)
-    .then((user) => {
-      req.user = user;
-      next();
-    })
-    .catch((err) => console.log(err));
-});
+// app.use((req, res, next) => {
+//   if (!req.session.user) {
+//     return next();
+//   }
+//   User.findById(req.session.user._id)
+//     .then((user) => {
+//       req.user = user;
+//       next();
+//     })
+//     .catch((err) => console.log(err));
+// });
 
-app.use(csrf());
+// app.use(csrf());
 
 //routes
 app.use('/admin', adminRoutes);
@@ -87,17 +87,17 @@ app.use(userRoutes);
 app.use(accountRoutes);
 
 // app.use('/500', errorController.get500Page);
-app.use(errorController.get404Page);
+// app.use(errorController.get404Page);
 
-app.use(errorLog);
+// app.use(errorLog);
 
-mongoose
-  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
-  .then(() => {
-    console.log('connected to mongoDB');
+// mongoose
+//   .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
+//   .then(() => {
+//     console.log('connected to mongoDB');
 
-    app.listen(port);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+//     app.listen(port);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
