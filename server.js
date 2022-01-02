@@ -42,11 +42,11 @@ app.listen(config.PORT, (err) => {
   if (err) {
     console.error(err);
   } else {
-    console.log(
-      `listening at http://localhost:${config.PORT} (${config.MODE} mode)`
-    );
-    console.log(
-      `static directory (${path.join(__dirname, config.STATIC_DIR)} )`
-    );
+    // console.log(
+    //   `listening at http://localhost:${config.PORT} (${config.MODE} mode)`
+    // );
+    // console.log(
+    //   `static directory (${path.join(__dirname, config.STATIC_DIR)} )`
+    // );
   }
 });
