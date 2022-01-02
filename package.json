@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/erkamguresen/angular-city-guide#readme",
   "dependencies": {
+    "cloudinary": "^1.28.0",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "mongoose": "^6.1.4",
     "morgan": "^1.10.0",
