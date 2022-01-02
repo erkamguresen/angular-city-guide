@@ -1,0 +1,28 @@
+{
+  "name": "angular-city-guide",
+  "version": "1.0.0",
+  "description": "angular and node based a city guide forum ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erkamguresen/angular-city-guide.git"
+  },
+  "author": "erkam guresen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erkamguresen/angular-city-guide/issues"
+  },
+  "homepage": "https://github.com/erkamguresen/angular-city-guide#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "mongoose": "^6.1.4",
+    "multer": "^1.4.4"
+  },
+  "engines": {
+    "node": "17.x"
+  }
+}
