@@ -1,103 +1,52 @@
-const express = require('express');
-const app = express();
+'use strict';
 
-// const bodyParser = require('body-parser');
+const fs = require('fs');
 const path = require('path');
 
-// const dotenv = require('dotenv');
-// dotenv.config();
+const express = require('express');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const cors = require('cors');
 
-// const mongoose = require('mongoose');
-// const cookieParser = require('cookie-parser');
-// const session = require('express-session');
-// const MongoDBStore = require('connect-mongodb-session')(session);
-// const csrf = require('csurf');
-// const multer = require('multer');
+const api = require('./api');
+const config = require('./api/config');
 
-// const User = require('./models/user');
-// const errorLog = require('./middleware/errorLog');
+const app = express();
 
-// var store = new MongoDBStore({
-//   uri: process.env.MONGODB_URI,
-//   collection: 'mySessions',
-// });
+app.use(cors());
+app.use(bodyParser.json());
 
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, './public/img');
-//   },
-//   filename: function (req, file, cb) {
-//     cb(
-//       null,
-//       file.fieldname + '-' + Date.now() + path.extname(file.originalname)
-//     );
-//   },
-// });
+app.use(
+  morgan('combined', {
+    stream: fs.createWriteStream(path.join(__dirname, 'access.log'), {
+      flags: 'a',
+    }),
+  })
+);
 
-// TODO write custom storage
-// https://medium.com/@singhcoolish/node-js-file-upload-to-s3-using-multer-custom-storage-engine-292a2e92cf12
-// const storage = multer.memoryStorage();
+// if (config.MODE === "development") {
+//   app.use(morgan("dev"));
+// }
 
-// app.set('view engine', 'pug');
-// app.set('views', './views');
+app.use('/api', api);
 
-// const adminRoutes = require('./routes/admin');
-// const userRoutes = require('./routes/shop');
-// const accountRoutes = require('./routes/account');
+app.use('/', express.static(path.join(__dirname, config.STATIC_DIR)));
 
-// const errorController = require('./controllers/errors');
+/* eslint-disable */
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).end();
+});
 
-const port = process.env.PORT || 3000;
-const static = process.env.STATIC_DIR || './city-guide/dist/city-guide';
-
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(multer({ storage: storage }).single('image'));
-// app.use(cookieParser());
-// app.use(
-//   session({
-//     secret: process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: {
-//       maxAge: 1000 * 60 * 60,
-//       // maxAge: 1000 * 60 * 60 * 24 * 7,
-//     },
-//     store: store,
-//   })
-// );
-app.use(express.static(path.join(__dirname, static)));
-
-// app.use((req, res, next) => {
-//   if (!req.session.user) {
-//     return next();
-//   }
-//   User.findById(req.session.user._id)
-//     .then((user) => {
-//       req.user = user;
-//       next();
-//     })
-//     .catch((err) => console.log(err));
-// });
-
-// app.use(csrf());
-
-//routes
-app.use('/admin', adminRoutes);
-app.use(userRoutes);
-app.use(accountRoutes);
-
-// app.use('/500', errorController.get500Page);
-// app.use(errorController.get404Page);
-
-// app.use(errorLog);
-
-// mongoose
-//   .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
-//   .then(() => {
-//     console.log('connected to mongoDB');
-
-//     app.listen(port);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
+app.listen(config.PORT, (err) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log(
+      `listening at http://localhost:${config.PORT} (${config.MODE} mode)`
+    );
+    console.log(
+      `static directory (${path.join(__dirname, config.STATIC_DIR)} )`
+    );
+  }
+});
