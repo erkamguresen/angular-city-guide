@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
 
-const api = require('./api');
+const api = require('./Api');
 const config = require('./api/config');
 
 const app = express();
@@ -42,11 +42,8 @@ app.listen(config.PORT, (err) => {
   if (err) {
     console.error(err);
   } else {
-    // console.log(
-    //   `listening at http://localhost:${config.PORT} (${config.MODE} mode)`
-    // );
-    // console.log(
-    //   `static directory (${path.join(__dirname, config.STATIC_DIR)} )`
-    // );
+    console.log(
+      `listening at http://localhost:${config.PORT} (${config.MODE} mode)`
+    );
   }
 });
