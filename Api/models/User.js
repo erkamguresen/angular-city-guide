@@ -31,3 +31,5 @@ const userSchema = mongoose.Schema({
 });
 
 module.exports = mongoose.model('User', userSchema); //db collection is automatically 'users'
+
+// list of cities of the user
