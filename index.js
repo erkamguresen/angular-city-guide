@@ -24,15 +24,14 @@ app.use(
   })
 );
 
-// if (config.MODE === "development") {
-//   app.use(morgan("dev"));
-// }
+if (config.MODE === 'development') {
+  app.use(morgan('dev'));
+}
 
 app.use('/api', api);
 
 app.use('/', express.static(path.join(__dirname, config.STATIC_DIR)));
 
-/* eslint-disable */
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).end();

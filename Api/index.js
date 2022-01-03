@@ -2,9 +2,7 @@
 
 const express = require('express');
 
-// const routes = require('./routes');
-// const booksRoute = require('./routes/books');
-// const registerRoute = require('./routes/register');
+const accountRoutes = require('./routes/account.routes.js');
 // const loginRoute = require('./routes/login');
 // const authenticateUser = require('./middleware/authenticate');
 // const userRoutes = require('./routes/users');
@@ -12,14 +10,11 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.send('API! go to `/api`');
+  res.send('API! welcome to `/api`');
 });
 
-//general search
-// router.use('/books', booksRoute);
-
 //register
-// router.use('/register', registerRoute);
+router.use('/account/', accountRoutes);
 
 // login
 // router.use('/login', loginRoute);
