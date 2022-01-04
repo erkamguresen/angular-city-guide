@@ -8,6 +8,11 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
 
+const dotenv = require('dotenv');
+dotenv.config();
+
+const mongoose = require('mongoose');
+
 const api = require('./Api');
 const config = require('./Api/config');
 
@@ -46,3 +51,14 @@ app.listen(config.PORT, (err) => {
     );
   }
 });
+
+mongoose
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
+  .then(() => {
+    console.log('connected to mongoDB');
+
+    app.listen(port);
+  })
+  .catch((err) => {
+    console.log(err);
+  });

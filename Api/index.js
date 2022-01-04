@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 });
 
 //register
-router.use('/account/', accountRoutes);
+router.use('/accounts/', accountRoutes);
 
 // login
 // router.use('/login', loginRoute);

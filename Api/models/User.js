@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema({
   email: {
     type: String,
     required: true,
-    validate: [isEmail, 'Invalid Email'],
+    // validate: [isEmail, 'Invalid Email'],
   },
   birthday: {
     type: Date,
