@@ -42,22 +42,20 @@ app.use((err, req, res, next) => {
   res.status(500).end();
 });
 
-app.listen(config.PORT, (err) => {
-  if (err) {
-    console.error(err);
-  } else {
-    console.log(
-      `listening at http://localhost:${config.PORT} (${config.MODE} mode)`
-    );
-  }
-});
-
 mongoose
   .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then(() => {
     console.log('connected to mongoDB');
 
-    app.listen(port);
+    app.listen(config.PORT, (err) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(
+          `listening at http://localhost:${config.PORT} (${config.MODE} mode)`
+        );
+      }
+    });
   })
   .catch((err) => {
     console.log(err);

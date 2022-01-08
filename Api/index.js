@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const unauthenticatedGraphqlRouter = require('./routers/unauthenticatedGraphqlRouter.js');
 
 const accountRoutes = require('./routes/account.routes.js');
 // const loginRoute = require('./routes/login');
@@ -13,8 +14,10 @@ router.get('/', (req, res) => {
   res.send('API! welcome to `/api`');
 });
 
+router.use('/v1', unauthenticatedGraphqlRouter);
+
 //register
-router.use('/accounts/', accountRoutes);
+// router.use('/accounts/', accountRoutes);
 
 // login
 // router.use('/login', loginRoute);

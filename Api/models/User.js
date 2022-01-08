@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema({
   email: {
     type: String,
     required: true,
-    // validate: [isEmail, 'Invalid Email'],
+    validate: [isEmail, 'Invalid Email'],
   },
   birthday: {
     type: Date,
@@ -50,5 +50,3 @@ const userSchema = mongoose.Schema({
 });
 
 module.exports = mongoose.model('User', userSchema); //db collection is automatically 'users'
-
-// list of cities of the user

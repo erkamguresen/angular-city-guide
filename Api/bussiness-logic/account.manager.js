@@ -1,11 +1,13 @@
-// const dataAccess = require('../data-access/mongodbAccess');
-
-// const usersStore = dataAccess('Users');
-
 const User = require('../models/User');
 const hashPassword = require('../utils/hashPassword');
 
 const salt = process.env.SALT_SECRET;
+const emailRegexp =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+const passwordRegexp = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})');
+// /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+// new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})');
 
 const accountManager = {
   register: async function (
@@ -17,7 +19,17 @@ const accountManager = {
     username,
     password
   ) {
-    // TODO check email and password regex
+    // check email and password regex
+    if (emailRegexp.test(email) === false) {
+      throw new Error('Invalid email');
+    }
+
+    if (passwordRegexp.test(password) === false) {
+      throw new Error(
+        'Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter and one number '
+      );
+    }
+
     const hashedPassword = hashPassword(`${email}.${password}.${salt}`);
 
     const user = {
@@ -32,41 +44,16 @@ const accountManager = {
       updatedAt: new Date(),
     };
 
-    // TODO check if user already exists
     console.log(user);
 
-    // const userInDB = await User.findOne({ email: user.email });
+    const userInDB = await User.findOne({ email: user.email });
 
     // console.log(userInDB);
 
-    // console.log('user in db', user);
-    // if (userInDB) {
-    //   req.session.errorMessage = 'This user already exists.';
-    //   req.session.save((err) => {
-    //     if (err) next(err);
-    //     return res.redirect('/register');
-    //   });
-    // }
-    // const registeredUsers = await usersStore.getAll({
-    //   username: username,
-    //   hashedPassword: hashedPassword,
-    // });
-
-    // const existingUser = registeredUsers.find(
-    //   (user) => user.username === username
-    // );
-
-    // if (existingUser) {
-    //   throw new Error('User already exists');
-    // }
-
-    // const response = await usersStore.insert(user);
-
-    // if (response.insertedCount === 0) {
-    //   throw new Error('User could not be created');
-    // }
-
-    // return { username, email };
+    console.log('user in db', userInDB);
+    if (userInDB) {
+      throw new Error('User already exists');
+    }
 
     const newUser = new User(user);
 

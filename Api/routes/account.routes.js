@@ -4,7 +4,7 @@ const accountController = require('../controllers/account.controller.js');
 const accountsRoute = express.Router();
 
 accountsRoute.use((req, res, next) => {
-  console.log('api! Register route');
+  console.log('api! Accounts route');
   next();
 });
 
