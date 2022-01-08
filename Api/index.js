@@ -25,7 +25,6 @@ router.use('/v1', unauthenticatedGraphqlRouter);
 // authentication with token
 // router.use('/users/:userId', authenticateUser);
 
-// use routes
-// router.use('/users', userRoutes);
+// router.use('/v2', authenticatedGraphqlRouter);
 
 module.exports = router;

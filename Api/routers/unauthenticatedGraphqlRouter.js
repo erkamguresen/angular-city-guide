@@ -1,27 +1,11 @@
 const express = require('express');
 
 const { graphqlHTTP } = require('express-graphql');
-const { buildSchema } = require('graphql');
+
+const schema = require('../graphql/schemas/schema.v1.js');
+const rootResolver = require('../graphql/resolvers/root.resolver.js');
 
 const unauthenticatedGraphqlRouter = express.Router();
-
-const schema = buildSchema(`
-  type Query {
-    hello: String!,
-    sayHello (name: String!): String!,
-  }
-`);
-
-const rootResolver = {
-  hello: () => {
-    console.log('Hello World!');
-    return 'Hello World!';
-  },
-  sayHello: ({ name }) => {
-    console.log("here's the name:", name);
-    return `Hello ${name}`;
-  },
-};
 
 unauthenticatedGraphqlRouter.use(
   '/graphql',

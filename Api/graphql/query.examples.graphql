@@ -1,0 +1,77 @@
+query ($name: String!, $user: UserInput!){
+  hello,
+  sayHello(name: $name),
+  sayHello2(user:$user)
+}
+
+
+{
+  "name": "erkam",
+  "user": {
+        "username": "1String!",
+    "email": "2String",
+    "password": "3String"
+  }
+}
+
+mutation (
+  $username: String!,
+  $email: String!, 
+  $password: String!
+){
+  createUser(username: $username, 
+            email: $email, 
+            password: $password){
+      username
+      email
+      password
+  }
+}
+
+{
+  "username": "king",
+  "email": "king@king.com",
+  "password": "123pass"
+}
+
+query ($name: String!){
+  hello,
+  sayHello(name: $name)
+}
+
+{
+  "name": "erkam"
+}
+
+
+# Welcome to GraphiQL
+#
+# GraphiQL is an in-browser tool for writing, validating, and
+# testing GraphQL queries.
+#
+# Type queries into this side of the screen, and you will see intelligent
+# typeaheads aware of the current GraphQL type schema and live syntax and
+# validation errors highlighted within the text.
+#
+# GraphQL queries typically start with a "{" character. Lines that start
+# with a # are ignored.
+#
+# An example GraphQL query might look like:
+#
+#     {
+#       field(arg: "value") {
+#         subField
+#       }
+#     }
+#
+# Keyboard shortcuts:
+#
+#  Prettify Query:  Shift-Ctrl-P (or press the prettify button above)
+#
+#     Merge Query:  Shift-Ctrl-M (or press the merge button above)
+#
+#       Run Query:  Ctrl-Enter (or press the play button above)
+#
+#   Auto Complete:  Ctrl-Space (or just start typing)
+#
+
