@@ -1,23 +1,23 @@
+const accountController = require('../../controllers/account.controller.js');
+
 const rootResolver = {
   hello: () => {
     console.log('Hello World!');
     return 'Hello World!';
   },
   sayHello: ({ name }) => {
-    console.log("here's the name:", name);
+    // console.log("here's the name:", name);
     return `Hello ${name}`;
   },
   sayHello2: ({ user }) => {
-    console.log("here's the user:", user);
+    // console.log("here's the user:", user);
     return `Hello ${user.username}`;
   },
-  createUser: ({ username, email, password }) => {
-    console.log("here's the name:", username, email, password);
-    return {
-      username: username,
-      email: email,
-      password: password,
-    };
+  createUser: ({ user }) => {
+    console.log(user);
+    console.log("here's the name:", user.username, user.email, user.password);
+    return accountController.postRegister(user);
+    // return { username, email };
   },
 };
 

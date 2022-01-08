@@ -7,6 +7,11 @@ const rootResolver = require('../graphql/resolvers/root.resolver.js');
 
 const unauthenticatedGraphqlRouter = express.Router();
 
+unauthenticatedGraphqlRouter.use((req, res, next) => {
+  console.log('api! unauthenticated GraphQL route');
+  next();
+});
+
 unauthenticatedGraphqlRouter.use(
   '/graphql',
   graphqlHTTP({
@@ -15,10 +20,5 @@ unauthenticatedGraphqlRouter.use(
     graphiql: true,
   })
 );
-
-unauthenticatedGraphqlRouter.use((req, res, next) => {
-  console.log('api! unauthenticated GraphQL route');
-  next();
-});
 
 module.exports = unauthenticatedGraphqlRouter;

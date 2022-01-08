@@ -14,6 +14,10 @@ input UserInput {
     username: String!,
     email: String!,
     password: String!,
+    firstName: String,
+    lastName: String,
+    birthday: String,
+    isAdmin: Boolean
 }
 `);
 
