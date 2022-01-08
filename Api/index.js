@@ -1,9 +1,9 @@
 'use strict';
 
 const express = require('express');
-const unauthenticatedGraphqlRouter = require('./routers/unauthenticatedGraphqlRouter.js');
+const unauthenticatedGraphqlRouter = require('./routes/unauthenticated.graphql.routes.js');
 
-const accountRoutes = require('./routes/account.routes.js');
+// const accountRoutes = require('./routes/account.routes.js');
 // const loginRoute = require('./routes/login');
 // const authenticateUser = require('./middleware/authenticate');
 // const userRoutes = require('./routes/users');

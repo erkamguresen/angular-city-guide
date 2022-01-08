@@ -3,6 +3,7 @@ const mutation = `
     createUser(
         user: UserInput!            
         ): User,
+ 
 }
 `;
 

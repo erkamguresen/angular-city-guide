@@ -1,4 +1,4 @@
-const accountController = require('../../controllers/account.controller.js');
+const accountManager = require('../../bussiness-logic/account.manager.js');
 
 const rootResolver = {
   hello: () => {
@@ -14,10 +14,7 @@ const rootResolver = {
     return `Hello ${user.username}`;
   },
   createUser: ({ user }) => {
-    console.log(user);
-    console.log("here's the name:", user.username, user.email, user.password);
-    return accountController.postRegister(user);
-    // return { username, email };
+    return accountManager.registerUser(user);
   },
 };
 
