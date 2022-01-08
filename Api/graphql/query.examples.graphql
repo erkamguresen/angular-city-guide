@@ -1,6 +1,6 @@
-# real examples
+### real examples
 
-# register user with email and password
+## register user with email and password
 
 mutation (
   $user: UserInput!,
@@ -19,11 +19,94 @@ mutation (
   }
 }
 
-# login user with email and password
+# successful
+{
+  "data": {
+    "createUser": {
+      "username": "king",
+      "email": "queen@king.com"
+    }
+  }
+}
+
+#error
+{
+  "errors": [
+    {
+      "message": "User already exists",
+      "locations": [
+        {
+          "line": 4,
+          "column": 3
+        }
+      ],
+      "path": [
+        "createUser"
+      ]
+    }
+  ],
+  "data": {
+    "createUser": null
+  }
+}
+
+## login user with email and password
+query ($email: String!, $password: String!){
+  loginUser(email: $email,password:$password )
+}
+
+{
+	"email": "king2@king.com",
+  "password": "123passPass"
+}
+
+# successful
+{
+  "data": {
+    "loginUser": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJIYWNrIFlvdXIgRnV0dXJlIEJlbGdpdW0iLCJ1c2VySWQiOiI2MWQ5ZWMxMGJiOTNlYTcxMjVmODlkMDYiLCJ1c2VybmFtZSI6ImtpbmciLCJlbWFpbCI6ImtpbmcyQGtpbmcuY29tIiwiaWF0IjoxNjQxNjcyOTQzNjE3LCJleHAiOjE2NDE3NTkzNDM2MTd9.CQenQUv07tzDjcI7S0mHUoB6rtRqrb5nz-vwRWUJCc8"
+  }
+}
+
+# error
+{
+  "errors": [
+    {
+      "message": "Error logging in user",
+      "locations": [
+        {
+          "line": 4,
+          "column": 3
+        }
+      ],
+      "path": [
+        "loginUser"
+      ]
+    }
+  ],
+  "data": null
+}
+
+{
+  "errors": [
+    {
+      "message": "User not found",
+      "locations": [
+        {
+          "line": 4,
+          "column": 3
+        }
+      ],
+      "path": [
+        "loginUser"
+      ]
+    }
+  ],
+  "data": null
+}
 
 
 
-# examples before the api
+### examples before the api
 query ($name: String!, $user: UserInput!){
   hello,
   sayHello(name: $name),

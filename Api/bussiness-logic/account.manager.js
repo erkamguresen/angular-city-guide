@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const createToken = require('../utils/createToken');
 const hashPassword = require('../utils/hashPassword');
 
 const salt = process.env.SALT_SECRET;
@@ -63,21 +64,27 @@ const accountManager = {
 
   loginUser: (email, password) => {
     console.log('manager: loginUser');
-    return User.findOne({ email: email }).then((user) => {
-      console.log('user', user);
-      if (!user) {
-        throw new Error('User not found');
-      }
+    return User.findOne({ email: email })
+      .then((user) => {
+        console.log('user', user);
+        if (!user) {
+          throw new Error('User not found');
+        }
 
-      if (
-        user.hashedPassword !== hashPassword(`${email}.${password}.${salt}`)
-      ) {
-        throw new Error('Invalid password');
-      }
+        if (
+          user.hashedPassword !== hashPassword(`${email}.${password}.${salt}`)
+        ) {
+          throw new Error('Invalid password');
+        }
 
-      // TODO return actual token
-      return 'this is the token';
-    });
+        const token = createToken(user);
+
+        return token;
+      })
+      .catch((err) => {
+        console.log('Error logging in user', err);
+        return err;
+      });
   },
 };
 
