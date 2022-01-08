@@ -51,11 +51,33 @@ const accountManager = {
     try {
       return newUser.save().then((result) => {
         console.log('User created', result);
-        return result;
+        return {
+          username: result.username,
+          email: result.email,
+        };
       });
     } catch (err) {
       console.log('Error creating user', err);
     }
+  },
+
+  loginUser: (email, password) => {
+    console.log('manager: loginUser');
+    return User.findOne({ email: email }).then((user) => {
+      console.log('user', user);
+      if (!user) {
+        throw new Error('User not found');
+      }
+
+      if (
+        user.hashedPassword !== hashPassword(`${email}.${password}.${salt}`)
+      ) {
+        throw new Error('Invalid password');
+      }
+
+      // TODO return actual token
+      return 'this is the token';
+    });
   },
 };
 

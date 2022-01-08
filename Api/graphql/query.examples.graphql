@@ -1,3 +1,29 @@
+# real examples
+
+# register user with email and password
+
+mutation (
+  $user: UserInput!,
+){
+  createUser(user: $user){
+      username
+      email
+  }
+}
+
+{
+  "user" : {
+    "username": "king",
+    "email": "king2@king.com",
+    "password": "123passPass"
+  }
+}
+
+# login user with email and password
+
+
+
+# examples before the api
 query ($name: String!, $user: UserInput!){
   hello,
   sayHello(name: $name),

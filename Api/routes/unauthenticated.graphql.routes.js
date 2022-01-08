@@ -3,7 +3,7 @@ const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 
 const schema = require('../graphql/schemas/schema.v1.js');
-const rootResolver = require('../graphql/resolvers/root.resolver.js');
+const rootResolver = require('../graphql/resolvers/v1/root.resolver.js');
 
 const unauthenticatedGraphqlRouter = express.Router();
 

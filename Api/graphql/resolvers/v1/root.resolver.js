@@ -1,4 +1,5 @@
-const accountManager = require('../../bussiness-logic/account.manager.js');
+const queriesResolver = require('./queries.resolver.js');
+const mutationsResolver = require('./mutations.resolver.js');
 
 const rootResolver = {
   hello: () => {
@@ -13,9 +14,8 @@ const rootResolver = {
     // console.log("here's the user:", user);
     return `Hello ${user.username}`;
   },
-  createUser: ({ user }) => {
-    return accountManager.registerUser(user);
-  },
+  ...queriesResolver,
+  ...mutationsResolver,
 };
 
 module.exports = rootResolver;
