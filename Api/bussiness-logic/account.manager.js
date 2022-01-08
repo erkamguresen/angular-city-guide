@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const createToken = require('../utils/createToken');
+const { createToken } = require('../utils/jwToken');
 const hashPassword = require('../utils/hashPassword');
 
 const salt = process.env.SALT_SECRET;

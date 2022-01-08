@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-
 const JWT_SECRET = require('../config/tokens');
 
 function createToken(user) {
@@ -17,4 +16,20 @@ function createToken(user) {
   return token;
 }
 
-module.exports = createToken;
+function validateToken(token, userId) {
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+
+    console.log('Token decoded: ', decoded);
+
+    if (decoded.userId === userId && decoded.exp > Date.now()) {
+      return true;
+    } else {
+      throw new Error('Invalid token');
+    }
+  } catch (error) {
+    return false;
+  }
+}
+
+module.exports = { createToken, validateToken };
