@@ -1,1 +1,1 @@
-web: NODE_ENV=production STATIC_DIR="./city-guide/dist/city-guide" node index.js
+web: NODE_ENV=production STATIC_DIR="./city-guide/dist/city-guide" node server.js
