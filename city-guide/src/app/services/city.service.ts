@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CityService {
-  path = 'http://localhost:8080/api/v1/graphq';
+  path = 'http://localhost:8080/api/v1/graphql';
 
   constructor(private httpClient: HttpClient) {}
 
