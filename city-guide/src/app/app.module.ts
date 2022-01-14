@@ -7,16 +7,9 @@ import { NavComponent } from './nav/nav.component';
 import { CityComponent } from './city/city.component';
 
 @NgModule({
-  declarations: [	
-    AppComponent,
-      NavComponent,
-      CityComponent
-   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  declarations: [AppComponent, NavComponent, CityComponent],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, NavComponent, CityComponent],
 })
-export class AppModule { }
+export class AppModule {}
