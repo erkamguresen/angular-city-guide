@@ -15,6 +15,12 @@ export class CityService {
     const query = `query ($name: String!){
       hello,
       sayHello(name: $name)
+      cities {
+        id,
+        name,
+        description,
+        userId,
+      }
     }`;
     const variables = {
       name: 'erkam',
