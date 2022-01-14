@@ -10,6 +10,16 @@ type User {
     email: String!,
     password: String!,
 }
+type City {   
+    id: ID!,     
+    name: String!,
+    description: String!,
+    country: String!,
+    countryCode: String!,
+    createdAt: String!,
+    updatedAt: String!,
+    userId: Int!,
+}
 input UserInput {
     username: String!,
     email: String!,
