@@ -16,10 +16,10 @@ export class CityService {
       hello,
       sayHello(name: $name)
       cities {
-        id,
-        name,
-        description,
-        userId,
+        name
+        description
+        country
+        countryCode
       }
     }`;
     const variables = {
