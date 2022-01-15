@@ -5,6 +5,7 @@ const query = `
     sayHello2 (user: UserInput!): String!,
     loginUser (email: String!, password: String!): String!,
     cities: [City!]!,
+    city (id: ID!): City!,    
 }
 `;
 

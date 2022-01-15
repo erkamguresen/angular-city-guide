@@ -8,6 +8,10 @@ const queriesResolver = {
   cities: () => {
     return cityManager.getCities();
   },
+  city: (id) => {
+    // return { name: 'Ankara' };
+    return cityManager.getCity(id);
+  },
 };
 
 module.exports = queriesResolver;

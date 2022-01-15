@@ -9,9 +9,10 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 
 import { CityComponent } from './city/city.component';
+import { CityDetailsComponent } from './city-details/city-details.component';
 
 @NgModule({
-  declarations: [AppComponent, NavComponent, CityComponent],
+  declarations: [AppComponent, NavComponent, CityComponent, CityDetailsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

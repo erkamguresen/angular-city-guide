@@ -20,7 +20,21 @@ type City {
     updatedAt: String!,
     userId: Int!,
     url: String!,
+    photos: [Photo]!,
 }
+type Photo {
+    id: ID!,
+    cityId: ID!,
+    isMain: Boolean!,
+    url: String!,
+    description: String,
+    publicId: String!,
+    createdAt: String,
+    updatedAt: String,
+    userId: ID!,
+}
+
+
 input UserInput {
     username: String!,
     email: String!,
