@@ -32,7 +32,6 @@ const cityManager = {
       });
   },
   addCity: (city) => {
-    console.log('city, ', city);
     const newCity = new City({
       name: city.name,
       description: city.description,

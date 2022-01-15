@@ -76,7 +76,7 @@ export class CityService {
   }
 
   addCity(city: City): Observable<City> {
-    const mutation = `
+    const query = `
     mutation ( $city: CityInput!){
       addCity(city: $city) {
         id
@@ -96,7 +96,7 @@ export class CityService {
     return this.httpClient.post<City>(
       this.url,
       JSON.stringify({
-        mutation,
+        query,
         variables,
       }),
       {
