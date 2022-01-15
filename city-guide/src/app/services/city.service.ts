@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CityService {
-  origin: string = location.origin;
-  // origin: string = 'http://localhost:8080';
+  // origin: string = location.origin;
+  origin: string = 'http://localhost:8080';
   path: string = 'api/v1/graphql';
   url: string = `${this.origin}/${this.path}`;
   constructor(private httpClient: HttpClient) {}
@@ -49,6 +49,9 @@ export class CityService {
         country
         countryCode
         url
+        photos {
+          url 
+        }
       }
     }
     `;
