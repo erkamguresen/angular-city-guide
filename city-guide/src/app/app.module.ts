@@ -12,7 +12,8 @@ import { APP_ROUTES } from './routes';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { CityComponent } from './city/city.component';
-import { CityDetailsComponent } from './city-details/city-details.component';
+import { CityDetailsComponent } from './city/city-details/city-details.component';
+import { CityAddComponent } from './city/city-add/city-add.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CityDetailsComponent } from './city-details/city-details.component';
     NavComponent,
     CityComponent,
     CityDetailsComponent,
+    CityAddComponent,
   ],
   imports: [
     BrowserModule,

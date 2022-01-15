@@ -2,7 +2,10 @@ const mutation = `
 {
     createUser(
         user: UserInput!            
-        ): User,
+    ): User,
+    addCity(
+        city: CityInput!
+    ): City,
  
 }
 `;

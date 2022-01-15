@@ -31,6 +31,28 @@ const cityManager = {
         return err;
       });
   },
+  addCity: (city) => {
+    console.log('city, ', city);
+    const newCity = new City({
+      name: city.name,
+      description: city.description,
+      country: city.country,
+      countryCode: city.countryCode,
+      userId: city.userId,
+      url: city.url,
+    });
+
+    return newCity
+      .save()
+      .then((city) => {
+        console.log('city added', city);
+        return city;
+      })
+      .catch((err) => {
+        console.log(err);
+        return err;
+      });
+  },
 };
 
 module.exports = cityManager;

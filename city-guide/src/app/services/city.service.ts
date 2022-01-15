@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CityService {
-  origin: string = location.origin;
-  // origin: string = 'http://localhost:8080';
+  // origin: string = location.origin;
+  origin: string = 'http://localhost:8080';
   path: string = 'api/v1/graphql';
   url: string = `${this.origin}/${this.path}`;
   constructor(private httpClient: HttpClient) {}
@@ -64,6 +64,39 @@ export class CityService {
       this.url,
       JSON.stringify({
         query,
+        variables,
+      }),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      }
+    );
+  }
+
+  addCity(city: City): Observable<City> {
+    const mutation = `
+    mutation ( $city: CityInput!){
+      addCity(city: $city) {
+        id
+        name
+        description
+        country
+        countryCode
+        url
+      }
+    }
+    `;
+
+    const variables = {
+      city: city,
+    };
+
+    return this.httpClient.post<City>(
+      this.url,
+      JSON.stringify({
+        mutation,
         variables,
       }),
       {

@@ -4,8 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { GalleryItem, ImageItem } from 'ng-gallery';
 import { GALLERY_CONFIG } from 'ng-gallery';
 
-import { City } from '../models/City';
-import { CityService } from '../services/city.service';
+import { City } from '../../models/City';
+import { CityService } from '../../services/city.service';
 
 @Component({
   selector: 'app-city-details',

@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { CityDetailsComponent } from './city-details/city-details.component';
+import { CityDetailsComponent } from './city/city-details/city-details.component';
 import { CityComponent } from './city/city.component';
 import { NavComponent } from './nav/nav.component';
 

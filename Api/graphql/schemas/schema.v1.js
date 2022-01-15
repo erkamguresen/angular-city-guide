@@ -19,7 +19,7 @@ type City {
     createdAt: String!,
     updatedAt: String!,
     userId: Int!,
-    url: String!,
+    url: String,
     photos: [Photo]!,
 }
 type Photo {
@@ -44,6 +44,16 @@ input UserInput {
     birthday: String,
     isAdmin: Boolean
 }
+
+input CityInput {
+    name: String!,
+    description: String,
+    country: String!,
+    countryCode: String!,    
+    userId: ID!,
+    url: String,
+}
+
 `);
 
 module.exports = schema;
