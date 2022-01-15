@@ -15,9 +15,10 @@ export class CityComponent implements OnInit {
   constructor(private cityService: CityService) {}
 
   ngOnInit(): void {
-    this.cityService.getCities().subscribe((data) => {
-      this.message = data;
+    this.cityService.getCities().subscribe((data: any) => {
+      this.cities = data.data.cities;
       console.log(data);
+      console.log(this.cities);
     });
   }
 }

@@ -5,6 +5,7 @@ export class City {
   name: string;
   description: string;
   userId: number;
+  url: string;
   photos: Photo[];
 
   constructor(
@@ -12,12 +13,14 @@ export class City {
     name: string,
     description: string,
     userId: number,
+    url: string,
     photos: Photo[]
   ) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.userId = userId;
+    this.url = url;
     this.photos = photos;
   }
 }
