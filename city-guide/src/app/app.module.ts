@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { GalleryModule } from 'ng-gallery';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { APP_ROUTES } from './routes';
@@ -30,6 +31,8 @@ import { CityAddComponent } from './city/city-add/city-add.component';
     RouterModule.forRoot(APP_ROUTES),
     GalleryModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

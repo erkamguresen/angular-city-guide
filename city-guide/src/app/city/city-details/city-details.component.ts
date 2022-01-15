@@ -23,7 +23,7 @@ import { CityService } from '../../services/city.service';
   ],
 })
 export class CityDetailsComponent implements OnInit {
-  city: City = new City(-1, '', '', -1, '', []);
+  city: City = new City(-1, '', '', '', '', '');
 
   images: GalleryItem[] = [];
 
