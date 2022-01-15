@@ -19,6 +19,7 @@ type City {
     createdAt: String!,
     updatedAt: String!,
     userId: Int!,
+    url: String!,
 }
 input UserInput {
     username: String!,

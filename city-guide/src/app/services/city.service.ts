@@ -11,21 +11,18 @@ export class CityService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getCities(): Observable<string> {
-    const query = `query ($name: String!){
-      hello,
-      sayHello(name: $name)
+  getCities(): Observable<City[]> {
+    const query = `query {
       cities {
         name
         description
         country
         countryCode
+        url
       }
     }`;
-    const variables = {
-      name: 'erkam',
-    };
-    return this.httpClient.post<string>(
+    const variables = {};
+    return this.httpClient.post<City[]>(
       this.path,
       JSON.stringify({
         query,
@@ -40,3 +37,33 @@ export class CityService {
     );
   }
 }
+
+/**example call with variables:
+ * const query = `query ($name: String!){
+      hello,
+      sayHello(name: $name)
+      cities {
+        name
+        description
+        country
+        countryCode
+      }
+    }`;
+    const variables = {
+      name: 'erkam',
+    };
+    return this.httpClient.post<City[]>(
+      this.path,
+      JSON.stringify({
+        query,
+        variables,
+      }),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      }
+    );
+ * 
+ */

@@ -35,6 +35,9 @@ const citySchema = mongoose.Schema({
     ref: 'User',
     required: true,
   },
+  url: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model('City', citySchema); //db collection is automatically 'cities'
