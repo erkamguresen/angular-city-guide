@@ -5,7 +5,7 @@
 mutation (
   $user: UserInput!,
 ){
-  createUser(user: $user){
+  registerUser(user: $user){
       username
       email
   }

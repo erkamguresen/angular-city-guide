@@ -43,8 +43,6 @@ export class CityDetailsComponent implements OnInit {
             thumb: photo.url,
           });
         });
-
-        console.log(this.images);
       });
     });
   }

@@ -1,12 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import jwt_decode from 'jwt-decode';
+import { Observable } from 'rxjs';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  userToken: string = localStorage.getItem('token') || '';
+  userToken: string;
   decodedUserToken: any;
 
   // origin: string = location.origin;
@@ -14,9 +16,11 @@ export class AuthService {
   path: string = 'api/v1/graphql';
   url: string = `${this.origin}/${this.path}`;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+    this.userToken = localStorage.getItem('token') || '';
+  }
 
-  login(username: string, password: string) {
+  login(username: string, password: string): Observable<String> {
     const query = `query ($email: String!, $password: String!){
       loginUser(email: $email, password: $password)
     }`;
@@ -40,7 +44,7 @@ export class AuthService {
     );
   }
 
-  saveToken(token: string) {
+  saveToken(token: string): void {
     localStorage.setItem('token', token);
     this.userToken = token;
     this.decodedUserToken = jwt_decode(token);
@@ -48,15 +52,20 @@ export class AuthService {
     // console.log(this.decodedUserToken);
   }
 
-  registerUser() {
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
-
-    const query = `query {
-      registerUser
-    }`;
-    const variables = {};
+  registerUser(user: User): Observable<String> {
+    const query = `
+    mutation (
+      $user: UserInput!,
+    ){
+      registerUser(user: $user){
+          username
+          email
+      }
+    }
+    `;
+    const variables = {
+      user,
+    };
 
     return this.httpClient.post<String>(
       this.url,
@@ -65,8 +74,25 @@ export class AuthService {
         variables,
       }),
       {
-        headers,
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
       }
     );
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    this.userToken = '';
+    this.decodedUserToken = null;
+  }
+
+  isLoggedIn(): boolean {
+    return this.userToken.length > 0 && this.decodedUserToken.exp > Date.now();
+  }
+
+  getCurrentUserId(): string {
+    return this.decodedUserToken.userId;
   }
 }
