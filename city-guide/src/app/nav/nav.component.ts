@@ -36,11 +36,11 @@ export class NavComponent implements OnInit {
     });
   }
 
-  // logout() {
-  //   this.authService.logout();
-  // }
+  logout() {
+    this.authService.logout();
+  }
 
-  // isLoggedIn() {
-  //   return this.authService.isLoggedIn();
-  // }
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
 }

@@ -89,7 +89,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return this.userToken.length > 0 && this.decodedUserToken.exp > Date.now();
+    return this.userToken?.length > 0 && this.decodedUserToken.exp > Date.now();
   }
 
   getCurrentUserId(): string {

@@ -55,7 +55,12 @@
           </div>
         </li>
       </ul>
-      <form #loginFrom="ngForm" (ngSubmit)="login()" class="d-flex">
+      <form
+        *ngIf="!isLoggedIn()"
+        #loginFrom="ngForm"
+        (ngSubmit)="login()"
+        class="d-flex"
+      >
         <input
           class="form-control me-sm-2"
           name="loginUser"
