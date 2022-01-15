@@ -1,15 +1,46 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertifyService } from '../services/alertify.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  styleUrls: ['./nav.component.css'],
 })
 export class NavComponent implements OnInit {
+  loginUser: string;
+  loginPassword: string;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private alertifyService: AlertifyService
+  ) {
+    this.loginUser = '';
+    this.loginPassword = '';
   }
 
+  ngOnInit() {}
+
+  login() {
+    this.authService.login(this.loginUser, this.loginPassword).subscribe({
+      next: (data: any) => {
+        this.authService.saveToken(data.data.loginUser);
+        this.router.navigate(['/']);
+        this.alertifyService.success('Logged in successfully');
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  // logout() {
+  //   this.authService.logout();
+  // }
+
+  // isLoggedIn() {
+  //   return this.authService.isLoggedIn();
+  // }
 }

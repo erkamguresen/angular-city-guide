@@ -2,7 +2,7 @@ const accountManager = require('../../../bussiness-logic/account.manager.js');
 const cityManager = require('../../../bussiness-logic/city.manager.js');
 
 const mutationsResolver = {
-  createUser: ({ user }) => {
+  registerUser: ({ user }) => {
     return accountManager.registerUser(user);
   },
   addCity: ({ city }) => {

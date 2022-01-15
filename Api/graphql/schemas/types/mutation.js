@@ -1,6 +1,6 @@
 const mutation = `
 {
-    createUser(
+    registerUser(
         user: UserInput!            
     ): User,
     addCity(

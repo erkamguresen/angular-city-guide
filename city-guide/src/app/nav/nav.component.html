@@ -55,10 +55,25 @@
           </div>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-sm-2" type="text" placeholder="Search" />
+      <form #loginFrom="ngForm" (ngSubmit)="login()" class="d-flex">
+        <input
+          class="form-control me-sm-2"
+          name="loginUser"
+          type="text"
+          placeholder="email"
+          [(ngModel)]="loginUser"
+          required
+        />
+        <input
+          class="form-control me-sm-2"
+          name="loginPassword"
+          type="password"
+          placeholder="password"
+          [(ngModel)]="loginPassword"
+          required
+        />
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">
-          Search
+          Login
         </button>
       </form>
     </div>
