@@ -11,13 +11,15 @@ export class AuthService {
   userToken: string;
   decodedUserToken: any;
 
-  // origin: string = location.origin;
-  origin: string = 'http://localhost:8080';
+  origin: string = location.origin;
+  // origin: string = 'http://localhost:8080';
   path: string = 'api/v1/graphql';
   url: string = `${this.origin}/${this.path}`;
 
   constructor(private httpClient: HttpClient) {
     this.userToken = localStorage.getItem('token') || '';
+    this.decodedUserToken =
+      this.userToken !== '' ? jwt_decode(this.userToken) : null;
   }
 
   login(username: string, password: string): Observable<String> {
@@ -89,7 +91,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return this.userToken?.length > 0 && this.decodedUserToken.exp > Date.now();
+    return this.userToken !== '' && this.decodedUserToken?.exp > Date.now();
   }
 
   getCurrentUserId(): string {

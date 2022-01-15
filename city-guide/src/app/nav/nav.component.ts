@@ -21,7 +21,9 @@ export class NavComponent implements OnInit {
     this.loginPassword = '';
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.isLoggedIn();
+  }
 
   login() {
     this.authService.login(this.loginUser, this.loginPassword).subscribe({
@@ -38,6 +40,7 @@ export class NavComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.alertifyService.error('Logged out successfully');
   }
 
   isLoggedIn(): boolean {
