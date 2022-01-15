@@ -19,6 +19,6 @@ import { CityComponent } from './city/city.component';
     RouterModule.forRoot(APP_ROUTES),
   ],
   providers: [],
-  bootstrap: [AppComponent, NavComponent, CityComponent],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

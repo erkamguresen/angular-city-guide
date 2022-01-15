@@ -7,8 +7,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CityService {
-  path = 'http://localhost:8080/api/v1/graphql';
-
+  // origin: string = location.origin;
+  origin: string = 'http://localhost:8080';
+  path: string = 'api/v1/graphql';
+  url: string = `${this.origin}/${this.path}`;
   constructor(private httpClient: HttpClient) {}
 
   getCities(): Observable<City[]> {
@@ -23,7 +25,7 @@ export class CityService {
     }`;
     const variables = {};
     return this.httpClient.post<City[]>(
-      this.path,
+      this.url,
       JSON.stringify({
         query,
         variables,
