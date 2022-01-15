@@ -5,7 +5,9 @@ import {
   FormBuilder,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { City } from 'src/app/models/City';
+import { AlertifyService } from 'src/app/services/alertify.service';
 import { CityService } from 'src/app/services/city.service';
 
 @Component({
@@ -21,7 +23,9 @@ export class CityAddComponent implements OnInit {
 
   constructor(
     private cityService: CityService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private alertifyService: AlertifyService,
+    private router: Router
   ) {
     this.cityAddForm = this.createCityForm();
   }
@@ -49,7 +53,13 @@ export class CityAddComponent implements OnInit {
 
       console.log(this.city);
       this.cityService.addCity(this.city).subscribe((data: any) => {
-        console.log(data);
+        this.alertifyService.success(
+          `${data.data.addCity.name} is added successfully`
+        );
+
+        setTimeout(() => {
+          this.router.navigate([`/cityDetails/${data.data.addCity.id}`]);
+        }, 2000);
       });
     }
   }

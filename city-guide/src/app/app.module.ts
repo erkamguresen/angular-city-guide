@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { APP_ROUTES } from './routes';
+import { AlertifyService } from './services/alertify.service';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -34,7 +35,7 @@ import { CityAddComponent } from './city/city-add/city-add.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [AlertifyService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
