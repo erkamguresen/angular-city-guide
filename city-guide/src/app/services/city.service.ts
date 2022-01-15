@@ -16,6 +16,7 @@ export class CityService {
   getCities(): Observable<City[]> {
     const query = `query {
       cities {
+        id
         name
         description
         country
