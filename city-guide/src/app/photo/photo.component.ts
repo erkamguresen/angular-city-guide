@@ -62,7 +62,7 @@ export class PhotoComponent implements OnInit {
     // this.uploader.response.subscribe((res) => (this.response = res));
 
     this.uploader = new FileUploader({
-      url: this.baseUrl + '/cities/' + this.currentCityId + '/photos/upload',
+      url: this.baseUrl + 'api/cities/' + this.currentCityId + '/photos/upload',
       disableMultipart: true, // 'DisableMultipart' must be 'true' for formatDataFunction to be called.
       formatDataFunctionIsAsync: true,
       formatDataFunction: async (item: any) => {
