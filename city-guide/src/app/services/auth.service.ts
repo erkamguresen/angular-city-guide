@@ -11,8 +11,8 @@ export class AuthService {
   userToken: string;
   decodedUserToken: any;
 
-  origin: string = location.origin;
-  // origin: string = 'http://localhost:8080';
+  // origin: string = location.origin;
+  origin: string = 'http://localhost:8080';
   path: string = 'api/v1/graphql';
   url: string = `${this.origin}/${this.path}`;
 
@@ -55,6 +55,8 @@ export class AuthService {
   }
 
   registerUser(user: User): Observable<String> {
+    console.log(user);
+
     const query = `
     mutation (
       $user: UserInput!,
@@ -66,8 +68,14 @@ export class AuthService {
     }
     `;
     const variables = {
-      user,
+      user: {
+        username: user.userName,
+        email: user.email,
+        password: user.password,
+      },
     };
+
+    console.log(variables);
 
     return this.httpClient.post<String>(
       this.url,

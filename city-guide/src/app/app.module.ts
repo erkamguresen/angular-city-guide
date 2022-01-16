@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { GalleryModule } from 'ng-gallery';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxEditorModule } from 'ngx-editor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { APP_ROUTES } from './routes';
@@ -16,6 +17,7 @@ import { NavComponent } from './nav/nav.component';
 import { CityComponent } from './city/city.component';
 import { CityDetailsComponent } from './city/city-details/city-details.component';
 import { CityAddComponent } from './city/city-add/city-add.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { CityAddComponent } from './city/city-add/city-add.component';
     CityComponent,
     CityDetailsComponent,
     CityAddComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +37,7 @@ import { CityAddComponent } from './city/city-add/city-add.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxEditorModule,
   ],
   providers: [AlertifyService],
   bootstrap: [AppComponent],
