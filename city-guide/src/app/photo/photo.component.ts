@@ -76,6 +76,7 @@ export class PhotoComponent implements OnInit {
           });
         });
       },
+      authToken: 'Bearer ' + localStorage.getItem('token'),
     });
 
     this.hasBaseDropZoneOver = false;
