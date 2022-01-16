@@ -17,7 +17,9 @@ export class PhotoComponent implements OnInit {
   hasAnotherDropZoneOver: boolean;
   response: string;
   // TODO
-  baseUrl: string = 'http://localhost:8080';
+  // baseUrl: string = 'http://localhost:8080/api';
+  baseUrl: string = location.origin;
+
   currentMainPhoto: Photo;
   currentCityId: any;
 
@@ -27,14 +29,40 @@ export class PhotoComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.photos = [];
+    this.currentMainPhoto = new Photo('', '', false, '', '', -1);
+    this.currentCityId = this.activatedRoute.snapshot.params['cityId'];
+
+    // this.uploader = new FileUploader({
+    //   url: this.baseUrl + 'api/cities/' + this.currentCityId + '/photos/upload',
+    //   authToken: 'Bearer ' + localStorage.getItem('token'),
+    //   isHTML5: true,
+    //   allowedFileType: ['image'],
+    //   removeAfterUpload: true,
+    //   autoUpload: false,
+    //   maxFileSize: 10 * 1024 * 1024,
+    //   disableMultipart: true, // 'DisableMultipart' must be 'true' for formatDataFunction to be called.
+    //   formatDataFunctionIsAsync: true,
+    //   formatDataFunction: async (item: any) => {
+    //     return new Promise((resolve, reject) => {
+    //       resolve({
+    //         name: item._file.name,
+    //         length: item._file.size,
+    //         contentType: item._file.type,
+    //         date: new Date(),
+    //       });
+    //     });
+    //   },
+    // });
+
+    // this.hasBaseDropZoneOver = false;
+    // this.hasAnotherDropZoneOver = false;
+
+    // this.response = '';
+
+    // this.uploader.response.subscribe((res) => (this.response = res));
+
     this.uploader = new FileUploader({
-      url: this.baseUrl + 'api/cities/' + this.currentCityId + '/photos/upload',
-      authToken: 'Bearer ' + localStorage.getItem('token'),
-      isHTML5: true,
-      allowedFileType: ['image'],
-      removeAfterUpload: true,
-      autoUpload: false,
-      maxFileSize: 10 * 1024 * 1024,
+      url: this.baseUrl + '/cities/' + this.currentCityId + '/photos/upload',
       disableMultipart: true, // 'DisableMultipart' must be 'true' for formatDataFunction to be called.
       formatDataFunctionIsAsync: true,
       formatDataFunction: async (item: any) => {
@@ -56,13 +84,11 @@ export class PhotoComponent implements OnInit {
 
     this.uploader.response.subscribe((res) => (this.response = res));
 
-    this.currentMainPhoto = new Photo('', '', false, '', '', -1);
-    this.currentCityId = this.activatedRoute.snapshot.params['cityId'];
     // console.log(this);
   }
 
   ngOnInit(): void {
-    this.initializeUploader();
+    // this.initializeUploader();
   }
 
   initializeUploader(): void {

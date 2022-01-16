@@ -19,6 +19,23 @@ const config = require('./Api/config');
 const app = express();
 
 app.use(cors());
+
+// app.use((req, res, next) => {
+//   const allowedOrigins = [
+//     'http://localhost:4200',
+//     'http://localhost:8080',
+//     'www.example3.com',
+//   ];
+//   const origin = req.headers.origin;
+//   if (allowedOrigins.includes(origin)) {
+//     res.setHeader('Access-Control-Allow-Origin', origin);
+//   }
+
+//   res.header('Access-Control-Allow-Methods', 'GET, POST');
+
+//   return next();
+// });
+
 app.use(bodyParser.json());
 
 app.use(

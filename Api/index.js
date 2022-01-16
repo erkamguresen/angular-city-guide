@@ -2,6 +2,7 @@
 
 const express = require('express');
 const unauthenticatedGraphqlRouter = require('./routes/unauthenticated.graphql.routes.js');
+const photoUploadRouter = require('./routes/photo.upload.routes.js');
 
 const authenticateUser = require('./middleware/authenticate');
 
@@ -15,6 +16,8 @@ router.use('/v1', unauthenticatedGraphqlRouter);
 
 // authentication with token
 router.use(authenticateUser);
+
+router.use('cities/:cityId/photos/upload', photoUploadRouter);
 
 // router.use('/v2', authenticatedGraphqlRouter);
 

@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { City } from 'src/app/models/City';
 import { AlertifyService } from 'src/app/services/alertify.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { CityService } from 'src/app/services/city.service';
 
 @Component({
@@ -24,7 +25,8 @@ export class CityAddComponent implements OnInit {
     private cityService: CityService,
     private formBuilder: FormBuilder,
     private alertifyService: AlertifyService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.cityAddForm = this.createCityForm();
   }
@@ -47,8 +49,8 @@ export class CityAddComponent implements OnInit {
   addCity() {
     if (this.cityAddForm.valid) {
       this.city = Object.assign({}, this.cityAddForm.value);
-      // TODO
-      this.city.userId = '61d9ec10bb93ea7125f89d06';
+
+      this.city.userId = this.authService.getCurrentUserId();
 
       console.log(this.city);
 

@@ -11,8 +11,9 @@ export class AuthService {
   userToken: string;
   decodedUserToken: any;
 
-  // origin: string = location.origin;
-  origin: string = 'http://localhost:8080';
+  //TODO
+  origin: string = location.origin;
+  // origin: string = 'http://localhost:8080';
   path: string = 'api/v1/graphql';
   url: string = `${this.origin}/${this.path}`;
 
