@@ -4,6 +4,14 @@ import { AlertifyService } from '../services/alertify.service';
 import { AuthService } from '../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Photo } from '../models/Photo';
+import {
+  FormGroup,
+  FormControl,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
+import { CityService } from '../services/city.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-photo',
@@ -11,6 +19,13 @@ import { Photo } from '../models/Photo';
   styleUrls: ['./photo.component.css'],
 })
 export class PhotoComponent implements OnInit {
+  fileName = '';
+  // origin: string = location.origin;
+  origin: string = 'http://localhost:8080';
+
+  cityPhotoAddForm: FormGroup;
+  photo: any;
+
   photos: Photo[];
   uploader: FileUploader;
   hasBaseDropZoneOver: boolean;
@@ -25,9 +40,14 @@ export class PhotoComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private cityService: CityService,
     private alertifyService: AlertifyService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private httpClient: HttpClient
   ) {
+    this.cityPhotoAddForm = this.createCityForm();
+
     this.photos = [];
     this.currentMainPhoto = new Photo('', '', false, '', '', -1);
     this.currentCityId = this.activatedRoute.snapshot.params['cityId'];
@@ -79,6 +99,9 @@ export class PhotoComponent implements OnInit {
       authToken: 'Bearer ' + localStorage.getItem('token'),
     });
 
+    this.uploader.options.authTokenHeader = 'Authorization';
+    // this.uploader.options.headers = [];
+
     this.hasBaseDropZoneOver = false;
     this.hasAnotherDropZoneOver = false;
 
@@ -91,6 +114,12 @@ export class PhotoComponent implements OnInit {
 
   ngOnInit(): void {
     // this.initializeUploader();
+  }
+
+  createCityForm() {
+    return this.formBuilder.group({
+      image: new FormControl('', Validators.required),
+    });
   }
 
   initializeUploader(): void {
@@ -119,5 +148,50 @@ export class PhotoComponent implements OnInit {
 
   public fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
+  }
+
+  addPhoto() {
+    if (this.cityPhotoAddForm.valid) {
+      this.photo = Object.assign({}, this.cityPhotoAddForm.value);
+      console.log(this.photo);
+
+      this.cityService.addPhoto(this.currentCityId, this.photo).subscribe({
+        next: (next) => {
+          this.alertifyService.success('Photo added successfully');
+          this.cityPhotoAddForm.reset();
+          // this.photos.push(next);
+        },
+        error: (error) => {
+          this.alertifyService.error(error);
+        },
+      });
+    }
+  }
+
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+
+    if (file) {
+      this.fileName = file.name;
+
+      const formData = new FormData();
+
+      formData.append('thumbnail', file);
+
+      const upload$ = this.httpClient.post(
+        this.origin + '/api/cities/' + this.currentCityId + '/photos/upload',
+
+        formData,
+        {
+          headers: {
+            // 'Content-Type': 'application/json',
+            // Accept: 'application/json',
+            Authorization: 'Bearer ' + localStorage.getItem('token'),
+          },
+        }
+      );
+
+      upload$.subscribe();
+    }
   }
 }

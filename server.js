@@ -16,27 +16,32 @@ const mongoose = require('mongoose');
 const api = require('./Api');
 const config = require('./Api/config');
 
+//TODO
+// const multer = require('multer');
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, './public/img');
+//   },
+//   filename: function (req, file, cb) {
+//     cb(
+//       null,
+//       file.fieldname + '-' + Date.now() + path.extname(file.originalname)
+//     );
+//   },
+// });
+
 const app = express();
 
 app.use(cors());
 
-// app.use((req, res, next) => {
-//   const allowedOrigins = [
-//     'http://localhost:4200',
-//     'http://localhost:8080',
-//     'www.example3.com',
-//   ];
-//   const origin = req.headers.origin;
-//   if (allowedOrigins.includes(origin)) {
-//     res.setHeader('Access-Control-Allow-Origin', origin);
-//   }
-
-//   res.header('Access-Control-Allow-Methods', 'GET, POST');
-
-//   return next();
-// });
-
 app.use(bodyParser.json());
+
+//TODO
+// app.use(multer({ storage: storage }).single('photo'));
+// app.use((req, res, next) => {
+//   console.log(req.file);
+//   next();
+// });
 
 app.use(
   morgan('combined', {

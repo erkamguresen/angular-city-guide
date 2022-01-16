@@ -1,10 +1,12 @@
 const { validateToken } = require('../utils/jwToken');
 
 const authenticateUser = function (req, res, next) {
+  console.log(req.params);
   const tokenHeader = req.headers.authorization;
-  const userId = req.params.userId;
+  // const userId = req.params.userId;
 
-  if (!tokenHeader || !userId) {
+  console.log(tokenHeader);
+  if (!tokenHeader) {
     return res.status(401).send({
       message: 'Unauthorized',
     });
@@ -20,7 +22,7 @@ const authenticateUser = function (req, res, next) {
 
   const token = tokenArray[1];
 
-  const isValid = validateToken(token, userId);
+  const isValid = validateToken(token);
 
   if (isValid) {
     next();

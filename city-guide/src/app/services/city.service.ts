@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class CityService {
   //TODO
-  origin: string = location.origin;
-  // origin: string = 'http://localhost:8080';
+  // origin: string = location.origin;
+  origin: string = 'http://localhost:8080';
   path: string = 'api/v1/graphql';
   url: string = `${this.origin}/${this.path}`;
   constructor(private httpClient: HttpClient) {}
@@ -71,6 +71,22 @@ export class CityService {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
+        },
+      }
+    );
+  }
+
+  addPhoto(cityId: string, photo: any) {
+    return this.httpClient.post(
+      this.origin + '/api/cities/' + cityId + '/photos/upload',
+      JSON.stringify({
+        photo,
+      }),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
       }
     );

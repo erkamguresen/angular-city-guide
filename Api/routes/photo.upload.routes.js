@@ -4,9 +4,9 @@ const fs = require('fs');
 
 const photoUploadRouter = express.Router();
 
-// const DIR = './uploads/';
+const DIR = './uploads/';
 
-// const upload = multer({ dest: DIR });
+var upload = multer({ dest: DIR });
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -46,20 +46,28 @@ photoUploadRouter.use(function (req, res, next) {
 //   })
 // );
 
-photoUploadRouter.use(multer({ storage: storage }).any('image'));
+photoUploadRouter.use(multer({ storage: storage }).single('fileUpload'));
 
-// photoUploadRouter.get('/api', function (req, res) {
-//   res.end('file catcher example');
-// });
+photoUploadRouter.use(function (req, res, next) {
+  console.log('photo uploader route');
+  console.log('header', req.headers);
+  console.log('body', req.body);
+  next();
+});
 
-// photoUploadRouter.post('/api', function (req, res) {
-//   upload(req, res, function (err) {
-//     if (err) {
-//       return res.end(err.toString());
-//     }
+photoUploadRouter.get('', function (req, res) {
+  res.end('file catcher example');
+});
 
-//     res.end('File is uploaded');
-//   });
-// });
+photoUploadRouter.post('', function (req, res) {
+  console.log('file', req.file);
+  // upload(req, res, function (err) {
+  //   if (err) {
+  //     return res.end(err.toString());
+  //   }
+
+  res.end('File is uploaded');
+  // });
+});
 
 module.exports = photoUploadRouter;

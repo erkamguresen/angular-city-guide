@@ -16,13 +16,13 @@ function createToken(user) {
   return token;
 }
 
-function validateToken(token, userId) {
+function validateToken(token) {
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
 
     console.log('Token decoded: ', decoded);
 
-    if (decoded.userId === userId && decoded.exp > Date.now()) {
+    if (decoded.exp > Date.now()) {
       return true;
     } else {
       throw new Error('Invalid token');

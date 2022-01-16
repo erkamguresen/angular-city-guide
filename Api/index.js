@@ -17,7 +17,7 @@ router.use('/v1', unauthenticatedGraphqlRouter);
 // authentication with token
 router.use(authenticateUser);
 
-router.use('cities/:cityId/photos/upload', photoUploadRouter);
+router.use('/cities/:cityId/photos/upload', photoUploadRouter);
 
 // router.use('/v2', authenticatedGraphqlRouter);
 
