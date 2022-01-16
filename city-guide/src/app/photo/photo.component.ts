@@ -17,7 +17,7 @@ export class PhotoComponent implements OnInit {
   hasAnotherDropZoneOver: boolean;
   response: string;
   // TODO
-  // baseUrl: string = 'http://localhost:8080/api';
+  // baseUrl: string = 'http://localhost:8080';
   baseUrl: string = location.origin;
 
   currentMainPhoto: Photo;
@@ -62,7 +62,8 @@ export class PhotoComponent implements OnInit {
     // this.uploader.response.subscribe((res) => (this.response = res));
 
     this.uploader = new FileUploader({
-      url: this.baseUrl + 'api/cities/' + this.currentCityId + '/photos/upload',
+      url:
+        this.baseUrl + '/api/cities/' + this.currentCityId + '/photos/upload',
       disableMultipart: true, // 'DisableMultipart' must be 'true' for formatDataFunction to be called.
       formatDataFunctionIsAsync: true,
       formatDataFunction: async (item: any) => {
