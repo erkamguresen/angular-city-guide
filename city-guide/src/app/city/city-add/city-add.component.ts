@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -19,7 +19,6 @@ import { CityService } from 'src/app/services/city.service';
 export class CityAddComponent implements OnInit {
   city: City = new City(-1, '', '', '', '', '');
   cityAddForm: FormGroup;
-  // name = new FormControl('');
 
   constructor(
     private cityService: CityService,
@@ -52,6 +51,7 @@ export class CityAddComponent implements OnInit {
       this.city.userId = '61d9ec10bb93ea7125f89d06';
 
       console.log(this.city);
+
       this.cityService.addCity(this.city).subscribe((data: any) => {
         this.alertifyService.success(
           `${data.data.addCity.name} is added successfully`

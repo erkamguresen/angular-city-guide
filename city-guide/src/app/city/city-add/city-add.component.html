@@ -28,8 +28,10 @@
             class="form-control my-1"
             id="cityDescription"
             formControlName="description"
-            placeholder="Description*"
+            placeholder="Add your description*"
+            autofocus
           />
+
           <div
             class="help-block"
             *ngIf="
@@ -62,7 +64,7 @@
           <input
             type="text"
             class="form-control my-1"
-            id="cityCountry"
+            id="cityCountryCode"
             formControlName="countryCode"
             placeholder="Country Code*"
           />
