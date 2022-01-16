@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { GalleryModule } from 'ng-gallery';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxEditorModule } from 'ngx-editor';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { AppRoutingModule } from './app-routing.module';
 import { APP_ROUTES } from './routes';
@@ -18,6 +18,7 @@ import { CityComponent } from './city/city.component';
 import { CityDetailsComponent } from './city/city-details/city-details.component';
 import { CityAddComponent } from './city/city-add/city-add.component';
 import { RegisterComponent } from './register/register.component';
+import { PhotoComponent } from './photo/photo.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { RegisterComponent } from './register/register.component';
     CityDetailsComponent,
     CityAddComponent,
     RegisterComponent,
+    PhotoComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,7 @@ import { RegisterComponent } from './register/register.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxEditorModule,
+    FileUploadModule,
   ],
   providers: [AlertifyService],
   bootstrap: [AppComponent],

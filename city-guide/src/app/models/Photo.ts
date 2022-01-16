@@ -1,24 +1,29 @@
 export class Photo {
-  id: number;
-  cityId: number;
-  dateAdded: Date;
+  //   id: string;
+  cityId: string;
+
   description: string;
   isMain: boolean;
   url: string;
+  publicId: string;
+  userId: number;
+  dateAdded: Date;
 
   constructor(
-    id: number,
-    cityId: number,
-    dateAdded: Date,
+    cityId: string,
     description: string,
     isMain: boolean,
-    url: string
+    url: string,
+    publicId: string,
+    userId: number,
+    dateAdded: Date = new Date()
   ) {
-    this.id = id;
     this.cityId = cityId;
     this.dateAdded = dateAdded;
     this.description = description;
     this.isMain = isMain;
     this.url = url;
+    this.publicId = publicId;
+    this.userId = userId;
   }
 }
